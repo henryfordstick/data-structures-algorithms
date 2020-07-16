@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据结构之栈</title>
+</head>
+<body>
+    <script>
+        function Stack(){
+            this.dataStore = []; // 保存栈内元素
+            this.top = 0; // 标记可以插入新元素的位置，栈内压入元素该变量变大，弹出元素该变量变小
+            this.push = push; // 入栈操作
+            this.pop = pop; // 出站操作
+            this.peek = peek; // 返回栈顶元素
+            this.clear = clear; // 清空栈
+            this.length = length; // 栈的长度
+        }
+        
+        function push(element) {
+            this.dataStore[this.top ++] = element;
+        }
+        
+        function pop() {
+            return this.dataStore[--this.top];
+        }
+        
+        function peek() {
+            return this.dataStore[this.top - 1];
+        }
+
+        function length() {
+            return this.top;
+        }
+        
+        function clear() {
+            delete this.dataStore;
+            this.dataStore.length = 0;
+            this.top = 0;
+        }
+    </script>
+</body>
+</html>

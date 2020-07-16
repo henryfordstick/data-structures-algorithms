@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>集合</title>
+</head>
+<body>
+<script>
+  function Set() {
+    this.dataStore = [];
+    this.add = add;
+    this.remove = remove;
+    this.show = show;
+    this.union = union; // 并集
+    this.contains = contains;
+    this.intersect = intersect; // 交集
+    this.difference = difference; // 补集
+  }
+
+  function add(data) {
+    if (this.dataStore.indexOf(data) < 0){
+      this.dataStore.push(data);
+    } else {
+      return false;
+    }
+  }
+
+  function remove(data) {
+    let pos = this.dataStore.indexOf(data);
+    if (pos > -1){
+      this.dataStore.splice(pos,1);
+    } else {
+      return false;
+    }
+  }
+
+  function show() {
+    return this.dataStore;
+  }
+  
+  function union(set) {
+    let temSet = new Set();
+    for (let i = 0; i < this.dataStore.length; i++){
+      temSet.add(this.dataStore[i]);
+    }
+
+    for (let i = 0; i < set.dataStore.length; i++){
+      if (!temSet.contains(set.dataStore[i])){
+        temSet.dataStore.push(set.dataStore[i]);
+      }
+    }
+    return temSet;
+  }
+
+  function contains(data) {
+    if (this.dataStore.indexOf(data) > -1){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  function intersect(set) {
+    let tempSet = new Set();
+    for (let i = 0; i < this.dataStore.length; i++){
+      if (set.contains(this.dataStore[i])){
+        tempSet.add(this.dataStore[i]);
+      }
+    }
+  }
+  
+  function difference(set) {
+    let tempSet = new Set();
+    for (let i = 0; i < this.dataStore.length; i++){
+      if (!set.contains(this.dataStore[i])){
+        tempSet.add(this.dataStore[i]);
+      }
+    }
+    return tempSet;
+  }
+</script>
+</body>
+</html>

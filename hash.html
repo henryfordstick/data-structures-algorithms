@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>散列</title>
+</head>
+<body>
+  <script>
+    function HashTable() {
+      this.dataStore = new Array(137);
+      this.simpleHash = simpleHash;
+      this.put = put;
+      this.get = get;
+      this.showDistro = showDistro;
+      this.betterHash = betterHash;
+    }
+    
+    function buildChains() {
+
+    }
+    
+    function simpleHash(data) {
+      let total = 0;
+      for (let i = 0; i < data.length; i++){
+        total += data.charCodeAt(i);
+      }
+      return total % this.dataStore.length;
+    }
+    
+    function betterHash(data) {
+      let H = 31;
+      let total = 0;
+      for (let i = 0; i < data.length; i++){
+        total += H*total + data.charCodeAt(i);
+      }
+
+      if(total < 0){
+        total += this.dataStore.length - 1;
+      }
+      return total % this.dataStore.length;
+    }
+    
+    function put(data) {
+      let pos = this.simpleHash(data);
+      this.dataStore[pos] = data;
+    }
+    
+    function get(key) {
+      return this.dataStore[this.simpleHash(key)];
+    }
+
+    function showDistro() {
+      let n = 0;
+      for (let i = 0; i < this.dataStore.length; i++){
+        if(this.dataStore[i] !== undefined){
+          console.log(`key:${i},value:${this.dataStore[i]}`)
+        }
+      }
+    }
+
+    let hTable = new HashTable();
+    hTable.put('china');
+    hTable.put('Japan');
+    hTable.put('America');
+    hTable.showDistro();
+  </script>
+</body>
+</html>
