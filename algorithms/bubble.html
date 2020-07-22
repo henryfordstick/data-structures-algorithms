@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>冒泡排序算法</title>
+</head>
+<body>
+  <script>
+    let CArray = function () {
+      this.dataStore = [10,8,8,3,2,9,4,5,1];
+      this.swap = swap;
+      this.bubbleSort = bubbleSort;
+    }
+    
+    function swap(arr,index1,index2) {
+      [arr[index2],arr[index1]] = [arr[index1],arr[index2]];
+    }
+    
+    function bubbleSort() {
+      let data = this.dataStore;
+      let numLen = data.length;
+
+      for (let outer = numLen; outer >= 2; -- outer){
+        for (let inner = 0; inner <= outer - 1; inner ++){
+          if (data[inner] > data[inner + 1]){
+            this.swap(data,inner,inner + 1);
+          }
+        }
+      }
+    }
+
+    const nums = new CArray();
+    nums.bubbleSort();
+    console.log(nums.dataStore);
+  </script>
+</body>
+</html>
